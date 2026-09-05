@@ -49,7 +49,7 @@ def generate_docx_bytes(text: str) -> bytes:
     buffer.seek(0)
     return buffer.getvalue()
 
-def create_synthetic_corpus(output_dir: str = "data/raw", count: int = 100):
+def create_synthetic_corpus(output_dir: str = "edisco-pipeline/data/raw", count: int = 100):
     os.makedirs(output_dir, exist_ok=True)
     
     generated_files = []
