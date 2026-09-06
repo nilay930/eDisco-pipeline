@@ -91,7 +91,8 @@ def create_synthetic_corpus(output_dir: str = "edisco-pipeline/data/raw", count:
         generated_files.append(filepath)
 
     # Force Exact Duplicates (simulating eDiscovery duplicate documents)
-    for dup_idx in range(5):
+    duplicate_count = min(5, len(generated_files))
+    for dup_idx in range(duplicate_count):
         source_file = generated_files[dup_idx]
         file_ext = source_file.split('.')[-1]
         dup_filename = f"DOC_DUP_{dup_idx+1:04d}_COPY.{file_ext}"
@@ -99,7 +100,7 @@ def create_synthetic_corpus(output_dir: str = "edisco-pipeline/data/raw", count:
         with open(source_file, "rb") as src, open(dup_filepath, "wb") as dst:
             dst.write(src.read())
 
-    print(f"✅ Generated {count + 5} synthetic eDiscovery documents in '{output_dir}'.")
+    print(f"✅ Generated {count + duplicate_count} synthetic eDiscovery documents in '{output_dir}'.")
 
 if __name__ == "__main__":
     create_synthetic_corpus()
